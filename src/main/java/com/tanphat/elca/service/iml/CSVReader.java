@@ -2,16 +2,14 @@ package com.tanphat.elca.service.iml;
 
 import com.tanphat.elca.converter.CompanyConverter;
 import com.tanphat.elca.entity.Company;
-import com.tanphat.elca.service.DataParser;
+import com.tanphat.elca.service.DataReader;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVParser extends DataParser {
-
-
+public class CSVReader implements DataReader {
     @Override
     public List<Company> readData(Path filePath) {
         List<Company> companies = new ArrayList<>();  // Default to empty list.
