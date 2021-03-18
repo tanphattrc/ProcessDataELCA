@@ -28,7 +28,7 @@ public class Company {
     @Override
     public String toString() {
         return "Company [id=" + id + ", name=" + name + ", foundationDate=" + foundationDate + ", capital=" + capital + ", country="
-                + country + ", isHeadQuarter="+ isHeadQuarter+"]";
+                + country + ", isHeadQuarter=" + isHeadQuarter + "]";
     }
 
     public String getName() {

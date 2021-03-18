@@ -9,18 +9,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class CSVParser extends DataParser {
+public class CSVParser extends DataParser {
 
 
     @Override
     public List<Company> readData(Path filePath) {
-        List < Company > companies =  new ArrayList<>();  // Default to empty list.
-        try
-        {
-            List data= Files.readAllLines(filePath);
+        List<Company> companies = new ArrayList<>();  // Default to empty list.
+        try {
+            List data = Files.readAllLines(filePath);
             data.remove(0);
 
-            for(Object line:data) {
+            for (Object line : data) {
 
                 String[] attributes = line.toString().split(",");
                 Company company = CompanyConverter.toEntity(attributes);
@@ -28,9 +27,7 @@ public  class CSVParser extends DataParser {
             }
 
 
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return companies;
