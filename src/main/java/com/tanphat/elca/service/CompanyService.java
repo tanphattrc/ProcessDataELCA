@@ -1,19 +1,32 @@
 package com.tanphat.elca.service;
 
 import com.tanphat.elca.entity.Company;
+import com.tanphat.elca.factory.FileReaderFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CompanyService {
+    private String filePath;
+    private FileReader fileReader;
 
-    private static CompanyService companyService;
+    //    private static CompanyService companyService;
+//
+    public CompanyService(String filePath, FileReader fileReader) {
+        this.filePath = filePath;
 
-    private CompanyService() {
+        this.fileReader = fileReader;
 
     }
 
-    public int totalCapitalOfHeaderQuarterLocatedIn(List<Company> companies, String location) {
+    public int totalCapitalOfHeaderQuarterLocatedIn(String location) {
+        List<Company> companies = new ArrayList<>();
+        fileReader.read(filePath, company -> {
+            if (company.getCountry().equals(location)) {
+                companies.add(company);
+            }
+        });
 
         return companies.stream()
                 .filter(i -> i.getCountry().equals(location))
@@ -21,16 +34,23 @@ public class CompanyService {
 
     }
 
-    public List<String> getNameOfCompaniesByCountry(List<Company> companies, String location) {
-        return companies.stream().filter(i -> i.getCountry().equals(location)).
-                sorted((a, b) -> b.getCapital().compareTo(a.getCapital()))
-                .map(Company::getName).collect(Collectors.toList());
+    public List<String> getNameOfCompaniesByCountry(String location) {
+        List<Company> companies = new ArrayList<>();
+        fileReader.read(filePath, company -> {
+            if (company.getCountry().equals(location)) {
+                companies.add(company);
+            }
+        });
+
+        return companies.stream()
+                .map(i -> i.getName())
+                .collect(Collectors.toList());
     }
 
-    public static CompanyService getInstance() {
-        if (companyService == null) {
-            companyService = new CompanyService();
-        }
-        return companyService;
-    }
+//    public static CompanyService getInstance() {
+//        if (companyService == null) {
+//            companyService = new CompanyService();
+//        }
+//        return companyService;
+//    }
 }

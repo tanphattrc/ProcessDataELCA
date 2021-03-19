@@ -17,6 +17,10 @@ public class Company {
         this.isHeadQuarter = isHeadQuarter;
     }
 
+    public Company() {
+
+    }
+
     public Integer getId() {
         return id;
     }
